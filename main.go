@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bufio"
 	"context"
 	"fmt"
 	"log"
@@ -15,7 +16,9 @@ import (
 func main() {
 	var folderPath string
 	fmt.Print("Enter the directory with the video files: ")
-	fmt.Scan(&folderPath)
+	scanner := bufio.NewScanner(os.Stdin)
+	scanner.Scan()
+	folderPath = scanner.Text()
 	var totalDuration float64
 	var fileCount int
 	err := filepath.Walk(folderPath, func(path string, info os.FileInfo, err error) error {
