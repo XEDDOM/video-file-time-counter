@@ -13,7 +13,9 @@ import (
 )
 
 func main() {
-	folderPath := "./videos"
+	var folderPath string
+	fmt.Print("Enter the directory with the video files: ")
+	fmt.Scan(&folderPath)
 	var totalDuration float64
 	var fileCount int
 	err := filepath.Walk(folderPath, func(path string, info os.FileInfo, err error) error {
