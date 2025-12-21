@@ -59,5 +59,15 @@ func main() {
 	fmt.Println()
 	fmt.Println("Result:")
 	fmt.Println("Number of video files:", fileCount)
-	fmt.Printf("Total time: %02d:%02d:%02d\n", totalHours, totalMinutes, totalSeconds)
+	fmt.Printf("Total time at normal playback speed: %02d:%02d:%02d\n", totalHours, totalMinutes, totalSeconds)
+	totalDuration15x := totalDuration / 1.5
+	totalHours = int(totalDuration15x / 3600)
+	totalMinutes = int((totalDuration15x - float64(totalHours*3600)) / 60)
+	totalSeconds = int(totalDuration15x) % 60
+	fmt.Printf("Total time at 1.5x playback speed: %02d:%02d:%02d\n", totalHours, totalMinutes, totalSeconds)
+	totalDuration2x := totalDuration / 2
+	totalHours = int(totalDuration2x / 3600)
+	totalMinutes = int((totalDuration2x - float64(totalHours*3600)) / 60)
+	totalSeconds = int(totalDuration2x) % 60
+	fmt.Printf("Total time at 2x playback speed: %02d:%02d:%02d\n", totalHours, totalMinutes, totalSeconds)
 }
