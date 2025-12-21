@@ -13,6 +13,13 @@ import (
 	"github.com/vansante/go-ffprobe"
 )
 
+func totalTime(td float64) (int, int, int) {
+	th := int(td / 3600)
+	tm := int((td - float64(th*3600)) / 60)
+	ts := int(td) % 60
+	return th, tm, ts
+}
+
 func main() {
 	var folderPath string
 	fmt.Print("Enter the directory with the video files: ")
@@ -53,21 +60,13 @@ func main() {
 	if err != nil {
 		log.Fatalln("Folder crawl error:", err)
 	}
-	totalHours := int(totalDuration / 3600)
-	totalMinutes := int((totalDuration - float64(totalHours*3600)) / 60)
-	totalSeconds := int(totalDuration) % 60
 	fmt.Println()
 	fmt.Println("Result:")
 	fmt.Println("Number of video files:", fileCount)
+	totalHours, totalMinutes, totalSeconds := totalTime(totalDuration)
 	fmt.Printf("Total time at normal playback speed: %02d:%02d:%02d\n", totalHours, totalMinutes, totalSeconds)
-	totalDuration15x := totalDuration / 1.5
-	totalHours = int(totalDuration15x / 3600)
-	totalMinutes = int((totalDuration15x - float64(totalHours*3600)) / 60)
-	totalSeconds = int(totalDuration15x) % 60
+	totalHours, totalMinutes, totalSeconds = totalTime(totalDuration / 1.5)
 	fmt.Printf("Total time at 1.5x playback speed: %02d:%02d:%02d\n", totalHours, totalMinutes, totalSeconds)
-	totalDuration2x := totalDuration / 2
-	totalHours = int(totalDuration2x / 3600)
-	totalMinutes = int((totalDuration2x - float64(totalHours*3600)) / 60)
-	totalSeconds = int(totalDuration2x) % 60
+	totalHours, totalMinutes, totalSeconds = totalTime(totalDuration / 2)
 	fmt.Printf("Total time at 2x playback speed: %02d:%02d:%02d\n", totalHours, totalMinutes, totalSeconds)
 }
