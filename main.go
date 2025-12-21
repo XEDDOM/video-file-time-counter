@@ -38,7 +38,7 @@ func main() {
 		defer cancel()
 		data, err := ffprobe.GetProbeDataContext(ctx, path)
 		if err != nil {
-			log.Printf("Processing error %s: %v", filepath.Base(path), err)
+			log.Printf("Processing error %s: %v", path, err)
 			return nil
 		}
 		duration := data.Format.DurationSeconds
